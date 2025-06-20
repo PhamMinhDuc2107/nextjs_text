@@ -1,5 +1,7 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Roboto_Mono } from "next/font/google"
+const roboto = Roboto_Mono({subsets:['vietnamese']})
 // app/layout.tsx
 export const metadata = {
   title: "My App",
@@ -13,8 +15,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
-       <ToastContainer />
+      <head>
+      </head>
+      <body className={roboto.className}>
+        {children}
+        <ToastContainer />
+
+      </body>
     </html>
   );
 }

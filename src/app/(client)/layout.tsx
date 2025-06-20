@@ -1,7 +1,6 @@
 "use client";
 import "@/app/globals.css";
 import Header from "@/components/Header/page";
-import Footer from "@/components/Footer/page";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -30,7 +29,6 @@ export default function ClientLayout({
         <>
           <Header></Header>
           {children}
-          <Footer></Footer>
         </>
       )}
       </>

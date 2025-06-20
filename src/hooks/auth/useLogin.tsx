@@ -1,6 +1,6 @@
 // hooks/useLogin.ts
 import { useState } from "react";
-import { login } from "@/service/auth";
+import { login } from "@/services/auth";
 import { toast } from "react-toastify";
 
 export function useLogin() {

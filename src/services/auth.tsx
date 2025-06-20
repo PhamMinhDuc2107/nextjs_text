@@ -1,4 +1,4 @@
-import { API_ENDPOINTS } from "@/lib/apiConfig";
+import { API_ENDPOINTS } from "@/config/apiConfig";
 import Cookies from "js-cookie";
 
 export const login = async (payload: LoginPayload) => {
@@ -19,9 +19,8 @@ export const login = async (payload: LoginPayload) => {
 			body: JSON.stringify(payload),
 		});
 		const data = await res.json();
-		
 		if (!res.ok) throw new Error(data.message || "Login failed");
-
+		
 		return data;
 	} catch (error: any) {
 		throw error;

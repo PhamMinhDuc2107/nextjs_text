@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { logout } from "@/service/auth"; 
+import { logout } from "@/services/auth"; 
 import { useRouter } from "next/navigation";
 
 export function useLogout() {
