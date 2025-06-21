@@ -17,9 +17,8 @@ const DepartmentView = () => {
         isLoading,
         error,
         page,
-        handleClickPage,
+        handleSetPage,
         search,
-        setPage,
         handleSearch,
     } = useDepartment();
 
@@ -53,7 +52,7 @@ const DepartmentView = () => {
         fetchDepartmentTree();
     }, []);
 
-    const handleClickModal = () => {
+    const handleCreateModal = () => {
         setModalMode('create');
         setEditData(null);
         setIsModalOpen(true);
@@ -79,14 +78,16 @@ const DepartmentView = () => {
         
         if (!res['success']) {
             toast.error("Xóa thất bại")
+            return;
         }
         const  data =await getDepartment()
-            let isDataPagi = data.data.length === 0 && page > 1;
-            if(isDataPagi) {
-                handleClickPage(page - 1)
-            }
-            updateDepartmentList(data)
-            toast.success("Xóa thành công")
+        let isDataPagi = data.data.length === 0 && page > 1;
+        if(isDataPagi) {
+            handleSetPage(page - 1)
+            return
+        }
+        updateDepartmentList(data)
+        toast.success("Xóa thành công")
     };
     const updateDepartmentList = (data: any) => {
         setDepartments(data.data);
@@ -99,7 +100,6 @@ const DepartmentView = () => {
         <>
             <TableView 
                 departments={departments}
-                departmentTree={departmentTree}
                 currentPage={currentPage}
                 lastPage={lastPage}
                 totalRecord={totalRecord}
@@ -107,9 +107,9 @@ const DepartmentView = () => {
                 error={error}
                 page={page}
                 search={search}
-                handleClickPage={handleClickPage}
+                handleClickPage={handleSetPage}
                 handleSearch={handleSearch}
-                handleClickModal={handleClickModal}
+                handleClickModal={handleCreateModal}
                 handleEditModal={handleEditModal}
                 handleDeleteDepart={handleDeleteDepart}
             />

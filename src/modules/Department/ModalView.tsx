@@ -48,25 +48,23 @@ const ModalView = ({ activeModal, handleCloseModal, mode, editData, departmentTr
             setPayload({ name: '', parent_id: null });
             setValueDrop("");
         }
-    }, [mode, editData, departmentTree]);
-
+    }, [mode, editData]);
     const handleClickDropdown = () => {
         setIsDropdown(true);
     };
 
     const handleClickOption = (e: React.MouseEvent<HTMLElement>) => {
-        const target = e.currentTarget as HTMLElement;
+        const target = e.target;
         const id = target.dataset.id;
         const name = target.textContent || "";
         
-        setIsDropdown(false);
         setValueDrop(name);
-        
         if (!id || id === "0") {
             setPayload({ ...payload, parent_id: null });
             return;
         }
         setPayload({ ...payload, parent_id: Number(id) });
+        setIsDropdown(false);
     };
 
     const handleSubmitForm = async (e: React.FormEvent) => {

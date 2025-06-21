@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import {useLogin} from "@/hooks/auth/useLogin";
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
@@ -8,7 +8,8 @@ const Login = () => {
 	let [email,setEmail] = useState<string>("");
 	let [password, setPassword] = useState<string>("");
 	let [remember, setRemember] = useState<boolean>(false);
-	let{ handleLogin, loading, error } = useLogin();
+	let{ handleLogin, isLoading, error } = useLogin();
+	
 	const router = useRouter();
 	const handleSubmit = async (e) => {
 		e.preventDefault(); 
@@ -16,16 +17,19 @@ const Login = () => {
 			email, password, remember
 		}
 		const res = await handleLogin(data);
-		
 		if (res?.token) {
 			Cookies.set("token", res.token, {
-					expires: remember ? 7 : 1, 
-					secure: true,    
-					sameSite: "lax",
-				});
-				router.push("/department");
+				expires: remember ? 7 : 1,  
+				secure: true,    
+			});
+			toast.success("Đăng nhập thành công")
+			router.push("/department");
+			return
    	}
 	};
+	useEffect(() => {
+		toast.warn(error)
+	},[error])
 	useEffect(() => {
 		let token = Cookies.get("token");
 		if(token) {
@@ -66,8 +70,9 @@ const Login = () => {
 									<button
 										type="submit"
 										className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-500 cursor-pointer"
+										disabled={isLoading}
 										>
-										Sign In
+										{isLoading ? "Loading..." : "Sign in"}
 									</button>  
 
 									<p className="text-sm font-light text-gray-500 dark:text-gray-400">

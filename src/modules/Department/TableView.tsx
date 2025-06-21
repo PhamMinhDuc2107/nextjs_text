@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 
 interface IProps {
     departments: IDepartment[];
-    departmentTree: IDepartment[];
     currentPage: number;
     lastPage: number;
     totalRecord: number;
@@ -25,13 +24,11 @@ interface IProps {
 
 const TableView = ({ 
     departments,
-    departmentTree,
     currentPage,
     lastPage,
     totalRecord,
     isLoading,
     error,
-    page,
     search,
     handleClickPage,
     handleSearch,

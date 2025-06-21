@@ -93,7 +93,7 @@ const useDepartment = () => {
       }
    };
 
-   const handleClickPage = (newPage: number) => {
+   const handleSetPage = (newPage: number) => {
       if (newPage !== page) setPage(newPage);
    };
 
@@ -121,8 +121,7 @@ const useDepartment = () => {
       error,
       clearError,
       page,
-      setPage,
-      handleClickPage,
+      handleSetPage,
       search,
       setSearch,
       handleSearch,

@@ -4,21 +4,22 @@ import { login } from "@/services/auth";
 import { toast } from "react-toastify";
 
 export function useLogin() {
-   const [loading, setLoading] = useState(false);
+   const [isLoading, setIsLoading] = useState(false);
    const [error, setError] = useState<string | null>(null);
 
-   const handleLogin = async (payload: LoginPayload) => {
+   const handleLogin = async (payload: ILoginPayload) => {
       try {
-         setLoading(true);
+         setIsLoading(true);
+         setError(null)
          const res = await login(payload);
-         setLoading(false);
-         toast.success("Đăng nhập thành công")
+         console.log(res);
+         setIsLoading(false);
          return res;
       } catch (err: any) {
-         toast.warn(err.message)
          setError(err.message)
-         setLoading(false);
+         setIsLoading(false);
+         return
       }
    };
-   return { handleLogin, loading, error };
+   return { handleLogin, isLoading, error };
 }

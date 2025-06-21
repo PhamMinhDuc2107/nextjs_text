@@ -1,9 +1,9 @@
 import { API_ENDPOINTS } from "@/config/apiConfig";
 import Cookies from "js-cookie";
 
-export const login = async (payload: LoginPayload) => {
+export const login = async (payload: ILoginPayload) => {
 	try {
-		await fetch("http://localhost:8000/sanctum/csrf-cookie", {
+		await fetch(API_ENDPOINTS.urlCSRF, {
 			credentials: "include", 
 		});
 		const csrfToken = Cookies.get("XSRF-TOKEN");

@@ -20,7 +20,6 @@ export default function RootLayout({
       <body className={roboto.className}>
         {children}
         <ToastContainer />
-
       </body>
     </html>
   );
